@@ -23,7 +23,7 @@
 
               <v-text-field
                 v-model="model.senha"
-                label="Password"
+                label="Senha"
                 name="senha"
                 prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -36,9 +36,9 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="secondary" @click="reset">Register</v-btn>
+            <v-btn color="secondary" @click="callRegister">Registrar</v-btn>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="validate">Login</v-btn>
+            <v-btn color="primary" @click="loginService">Login</v-btn>
           </v-card-actions>
         </v-card>
 
@@ -52,6 +52,7 @@
 <script>
 
 import size from 'lodash/size'
+import LoginService from '../services/LoginService'
 
 export default {
   data () {
@@ -72,12 +73,14 @@ export default {
     }
   },
   methods: {
-    validate () {
+    async loginService () {
       if (this.$refs.form.validate()) {
+        await LoginService.login(this.model.email, this.model.senha)
         this.$router.push({ name: 'contact-list' })
-      } else {
-        console.log('invalido')
       }
+    },
+    callRegister () {
+      this.$router.push({ name: 'register' })
     },
     reset () {
       this.$refs.form.reset()
