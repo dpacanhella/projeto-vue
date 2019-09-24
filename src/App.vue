@@ -1,13 +1,15 @@
 <template>
   <v-app>
-    <router-view></router-view>
+    <auth-layout></auth-layout>
   </v-app>
 </template>
 
 <script>
 
-export default {
-  name: 'App'
+import AuthLayout from './layout/AuthLayout.vue'
 
+export default {
+  name: 'App',
+  components: { AuthLayout }
 }
 </script>
